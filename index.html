@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knottz - Knyt samman föräldrar & återanvänd hållbart</title>
+<meta name="description" content="Den svenska plattformen för blivande föräldrar. Dela graviditetsresor, få produkttips, skänk bort & byt barnprylar hållbart. Knyt samman med föräldrar nära dig!">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Karla:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #FFF8F0;
+  --peach: #FFD4C4;
+  --soft-blue: #C4D7FF;
+  --terracotta: #E07A5F;
+  --forest: #3D5A51;
+  --warm-gray: #5A4A42;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  background: var(--cream);
+  color: var(--warm-gray);
+  overflow-x: hidden;
+}
+
+/* Animated background circles */
+.bg-circle {
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.15;
+  z-index: 0;
+  animation: float 20s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--peach);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--soft-blue);
+  bottom: -50px;
+  right: -50px;
+  animation-delay: 5s;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  background: var(--terracotta);
+  top: 50%;
+  right: 10%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* Main container */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 5rem;
+  color: var(--terracotta);
+  margin-bottom: 1rem;
+  font-style: italic;
+  letter-spacing: -3px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: var(--forest);
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Hero section */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+  animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+.hero-content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--warm-gray);
+}
+
+.hero-content .highlight {
+  background: linear-gradient(120deg, #FFD4C4 0%, #FFD4C4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 88%;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+/* Email signup form */
+.signup-box {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  animation: fadeInUp 1s ease-out 0.6s backwards;
+}
+
+.signup-box h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+
+.signup-box p {
+  color: var(--warm-gray);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--peach);
+  border-radius: 12px;
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--cream);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--terracotta);
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 122, 95, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 1.2rem;
+  background: var(--terracotta);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Karla', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: var(--forest);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(61, 90, 81, 0.3);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
+
+.success-message {
+  display: none;
+  background: #D4EDDA;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.success-message.show {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Features section */
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 6rem;
+  animation: fadeInUp 1s ease-out 0.9s backwards;
+}
+
+.feature {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--forest);
+  margin-bottom: 0.75rem;
+}
+
+.feature p {
+  color: var(--warm-gray);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Sustainability badge */
+.sustainability-badge {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 1s ease-out 1.2s backwards;
+}
+
+.sustainability-badge h3 {
+  font-size: 1.3rem;
+  color: #2E7D32;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sustainability-badge p {
+  color: #1B5E20;
+  font-size: 1rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--warm-gray);
+  opacity: 0.7;
+}
+
+footer a {
+  color: var(--terracotta);
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    font-size: 3.5rem;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+  }
+  
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .signup-box {
+    padding: 2rem;
+  }
+}
+</style>
+</head>
+
+<body>
+  <!-- Animated background circles -->
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+  <div class="bg-circle circle-3"></div>
+
+  <div class="container">
+    <header>
+      <h1 class="logo">Knottz</h1>
+      <p class="tagline">Knyt samman föräldrar. Återanvänd hållbart. Dela resan.</p>
+    </header>
+
+    <div class="hero">
+      <div class="hero-content">
+        <h2>Den svenska plattformen som knyter samman blivande föräldrar</h2>
+        <p>
+          Följ vänners graviditetsresor, få <span class="highlight">trovärdiga produkttips</span> från riktiga föräldrar, och <span class="highlight">skänk bort eller byt barnprylar hållbart</span> med föräldrar nära dig.
+        </p>
+        <p>
+          Inte som ett forum. Inte som en marknadsplats. Som en <strong>social plattform för föräldrar</strong> – där gemenskap möter hållbarhet.
+        </p>
+      </div>
+
+      <div class="signup-box">
+        <h3>Få early access</h3>
+        <p>Vi lanserar snart! Registrera ditt intresse så hör vi av oss när du kan börja använda Knottz.</p>
+        
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="name">Ditt namn</label>
+            <input type="text" id="name" name="name" required placeholder="Anna Andersson">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Din e-post</label>
+            <input type="email" id="email" name="email" required placeholder="anna@example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="dueDate">Beräknat födelsedatum (valfritt)</label>
+            <input type="date" id="dueDate" name="dueDate">
+          </div>
+          
+          <button type="submit">🌱 Gå med på Knottz</button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+          ✨ Tack! Vi hör av oss när Knottz lanserar!
+        </div>
+      </div>
+    </div>
+
+    <div class="sustainability-badge">
+      <h3>🌱 Hållbarhet i fokus</h3>
+      <p>
+        Varje år slängs tusentals barnvagnar, babykläder och leksaker – Knottz hjälper dig att ge dem nytt liv genom hållbar återanvändning
+      </p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📅</div>
+        <h4>Följ graviditeter</h4>
+        <p>Se vilka vänner som väntar barn och vilken vecka de är i. Dela glädjen tillsammans.</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">🛍️</div>
+        <h4>Produkttips</h4>
+        <p>Community-drivna rekommendationer från riktiga föräldrar. Inga sponsrade listor – bara äkta erfarenheter.</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <h4>Skänk bort & Byt</h4>
+        <p>Ge barnkläder, vagnar och utrustning nytt liv. Helt gratis. Lokalt. Hållbart för planeten.</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">💡</div>
+        <h4>Tips & Community</h4>
+        <p>Lär av andra föräldrars erfarenheter. Hitta lokala föräldragrupper. Dela resan tillsammans.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Byggd med ❤️ i Sverige av <a href="https://vibekoding.se" target="_blank">Vibekoding</a></p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">Har du frågor? Hör av dig till hello@knottz.se</p>
+    </footer>
+  </div>
+
+  <script>
+    // Form handling
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        dueDate: document.getElementById('dueDate').value,
+        timestamp: new Date().toISOString()
+      };
+      
+      // In production, send this to your backend/Supabase
+      console.log('Knottz signup data:', formData);
+      
+      // For now, simulate success
+      // TODO: Replace with actual API call to save to database
+      
+      // Show success message
+      document.getElementById('successMessage').classList.add('show');
+      document.getElementById('signupForm').reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('successMessage').classList.remove('show');
+      }, 5000);
+      
+      // Store in localStorage as backup (temporary solution)
+      const signups = JSON.parse(localStorage.getItem('knottz_signups') || '[]');
+      signups.push(formData);
+      localStorage.setItem('knottz_signups', JSON.stringify(signups));
+    });
+    
+    // Easter egg: Log how many people have signed up locally
+    const signupCount = JSON.parse(localStorage.getItem('knottz_signups') || '[]').length;
+    if (signupCount > 0) {
+      console.log(`🎉 ${signupCount} person(er) har registrerat intresse för Knottz lokalt!`);
+    }
+  </script>
+</body>
+</html>
