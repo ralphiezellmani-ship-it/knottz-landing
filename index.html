@@ -400,6 +400,9 @@ footer a {
       <div class="signup-box">
         <h3>Få early access</h3>
         <p>Vi lanserar snart! Registrera ditt intresse så hör vi av oss när du kan börja använda Knottz.</p>
+        <p style="margin-top: 0.75rem; font-size: 0.95rem; color: #5A4A42;">
+          Beta är <strong>invite-only</strong>. Du får tillgång via inbjudan när vi godkänt dig eller via en aktiv medlem.
+        </p>
         
         <form id="signupForm">
           <div class="form-group">
@@ -421,7 +424,7 @@ footer a {
         </form>
         
         <div id="successMessage" class="success-message">
-          ✨ Tack! Vi hör av oss när Knottz lanserar!
+          ✨ Tack! Om du blir utvald får du en personlig inbjudan till betan via email.
         </div>
       </div>
     </div>
@@ -476,32 +479,18 @@ footer a {
         dueDate: document.getElementById('dueDate').value,
         timestamp: new Date().toISOString()
       };
-      // Skicka till Brevo
-try {
-  const response = await fetch('https://api.brevo.com/v3/contacts', {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json',
-      'content-type': 'application/json',
-      'api-key': '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'
-    },
-    body: JSON.stringify({
-      email: formData.email,
-      attributes: {
-        FIRSTNAME: formData.name.split(' ')[0],
-        LASTNAME: formData.name.split(' ').slice(1).join(' ') || '',
-        DUE_DATE: formData.dueDate || ''
-      },
-      listIds: [3],
-      updateEnabled: true
-    })
-  });
-  
-  if (!response.ok) throw new Error('Brevo error');
-  console.log('Successfully added to Brevo!');
-} catch (error) {
-  console.error('Brevo sync failed:', error);
-}
+      // Skicka till Brevo (via serverless API)
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        if (!response.ok) throw new Error('Subscribe error');
+        console.log('Successfully added to Brevo!');
+      } catch (error) {
+        console.error('Brevo sync failed:', error);
+      }
       // Show success message
       document.getElementById('successMessage').classList.add('show');
       document.getElementById('signupForm').reset();
